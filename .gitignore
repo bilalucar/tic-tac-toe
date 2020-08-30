@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/public
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -46,3 +47,4 @@ testem.log
 Thumbs.db
 
 src/environments/firebase.ts
+.firebase
