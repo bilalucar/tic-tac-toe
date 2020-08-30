@@ -1,0 +1,23 @@
+<div class="game">
+  <div *ngIf="!session?.squares">
+    LOADING
+  </div>
+  <ng-container *ngIf="session?.squares">
+    <h1 class="game__title">
+      <span *ngIf="session.status !== statusEnum.FINISHED">
+        {{ isYourTurn() ? 'It\'s your move.' : 'It\'s opponent\'s turn.' }}
+      </span>
+      <span class="game__title--wonn" *ngIf="isWinner() && session.status === statusEnum.FINISHED">
+        Congratulations, you win!
+      </span>
+      <span class="game__title--lost" *ngIf="!isWinner() && session.status === statusEnum.FINISHED">
+        Sorry, you lost!
+      </span>
+    </h1>
+    <app-board class="board"
+               [squares]="session.squares"
+               [winnerSquares]="session.winnerSquares"
+               (squareClick)="updateSquares($event)">
+    </app-board>
+  </ng-container>
+</div>

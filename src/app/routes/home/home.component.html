@@ -1,0 +1,24 @@
+<div class="home">
+  <ng-container *ngIf="!playButtonClicked">
+    <img class="home__logo" src="assets/logo.jpg" alt="Tic Tac Toe">
+    <h1>Tic Tac Toe</h1>
+    <p class="home__description">
+      Play tic tac toe online with your friend. You can create a private board where you can
+      play unlimited number of games.
+    </p>
+    <button class="button" (click)="play()">
+      Play with a friend
+    </button>
+  </ng-container>
+  <ng-container *ngIf="playButtonClicked">
+    <h1 class="home__waiting-message">Waiting for players...</h1>
+    <div class="home__share">
+      <input #urlInputElement type="text" [value]="this.sessionUrl" disabled/>
+
+      <button class="button" (click)="copyToClipboard(urlInputElement)">Copy</button>
+    </div>
+    <p class="home__description">
+      To play with your friends, simply share the above link via WhatsApp, Skype, email or whatever you want!
+    </p>
+  </ng-container>
+</div>

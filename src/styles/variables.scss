@@ -1,0 +1,30 @@
+:root {
+  /* GLOBAL */
+
+  --background: #4d443f;
+  --radius: 2px;
+  --transition: 120ms;
+  --transition-slow: 230ms;
+
+  /* COLOR */
+
+  --color-dark: #000000;
+  --color-gray: #a8a8a8;
+  --color-white: #ffffff;
+  --color-alert: #f55d5d;
+  --color-x: #fbe474;
+  --color-o: #8bc0ec;
+
+  /* FONT */
+
+  --line-height: 1.5;
+  --line-height-head: 1.2;
+
+  --fs-small: 14px;
+  --fs-body: 16px;
+  --fs-h1: 32px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-h4: 18px;
+  --fs-character: 100px;
+}
