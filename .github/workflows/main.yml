@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: dist/tic-tac-toe
+          path: dist
         env:
           TIC_TAC_TOE_API_KEY: ${{ secrets.TIC_TAC_TOE_API_KEY }}
           TIC_TAC_TOE_AUTH_DOMAIN: ${{ secrets.TIC_TAC_TOE_AUTH_DOMAIN }}
