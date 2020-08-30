@@ -2,6 +2,8 @@ import { writeFile } from 'fs';
 
 const targetPath = './src/environments/environment.prod.ts';
 
+console.log(`Environment is created`);
+
 const envConfigFile = `export const environment = {
    production: true,
    firebase: {
@@ -16,6 +18,9 @@ const envConfigFile = `export const environment = {
     }
 };
 `;
+
+console.log('envConfigFile : ', envConfigFile);
+console.log('process.env : ', process.env);
 
 writeFile(targetPath, envConfigFile, 'utf8', (err) => {
   if (err) {
