@@ -9,9 +9,10 @@ import { RoutesModule } from './routes/routes.module';
 import { LayoutModule } from './layout/layout.module';
 import { SharedModule } from './shared/shared.module';
 
-import { firebaseConfig } from '../environments/firebase';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     RoutesModule,
     LayoutModule,
     SharedModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
