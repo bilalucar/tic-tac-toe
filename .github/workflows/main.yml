@@ -1,0 +1,49 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist/tic-tac-toe
+        env:
+          TIC_TAC_TOE_API_KEY: ${{ secrets.TIC_TAC_TOE_API_KEY }}
+          TIC_TAC_TOE_AUTH_DOMAIN: ${{ secrets.TIC_TAC_TOE_AUTH_DOMAIN }}
+          TIC_TAC_TOE_DATABASE_URL: ${{ secrets.TIC_TAC_TOE_DATABASE_URL }}
+          TIC_TAC_TOE_PROJECT_ID: ${{ secrets.TIC_TAC_TOE_PROJECT_ID }}
+          TIC_TAC_TOE_STORAGE_BUCKET: ${{ secrets.TIC_TAC_TOE_STORAGE_BUCKET }}
+          TIC_TAC_TOE_MESSAGING_SENDER_ID: ${{ secrets.TIC_TAC_TOE_MESSAGING_SENDER_ID }}
+          TIC_TAC_TOE_APP_ID: ${{ secrets.TIC_TAC_TOE_APP_ID }}
+          TIC_TAC_TOE_MEASUREMENT_ID: ${{ secrets.TIC_TAC_TOE_MEASUREMENT_ID }}
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+          path: dist
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
