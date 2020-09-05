@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   playButtonClicked = false;
   sessionKey: string;
   sessionUrl: string;
+  loading = true;
 
   constructor(private gameService: GameService,
               private router: Router,
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
       this.playButtonClicked = true;
       if (response?.path?.pieces_[1]){
         this.sessionKey = response.path.pieces_[1];
-        this.sessionUrl = window.location.href + this.sessionKey;
+        this.sessionUrl = `${window.location.origin}/${this.sessionKey}`;
       }
       this.checkSessionStatus();
     });

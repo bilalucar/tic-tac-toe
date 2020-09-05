@@ -5,14 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutDefaultComponent } from '../layout/default/default.component';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutDefaultComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: ':id', component: GameComponent }
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
+      { path: 'about', component: AboutComponent },
+      { path: ':id', component: GameComponent },
     ]
   },
   { path: '**', redirectTo: '' }

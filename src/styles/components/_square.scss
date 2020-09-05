@@ -1,0 +1,29 @@
+.square {
+  font-size: var(--fs-character-medium);
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+  color: var(--color-o);
+  transition: color, background-color 5s;
+  cursor: pointer;
+
+  &--highlight {
+    background-color: var(--color-o);
+    color: var(--color-dark);
+  }
+
+  &--x {
+    color: var(--color-x);
+  }
+
+  &--highlight-x {
+    background-color: var(--color-x);
+    color: var(--color-dark);
+  }
+
+  @include mq($from: tablet) {
+    font-size: var(--fs-character);
+  }
+}

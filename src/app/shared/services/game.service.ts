@@ -20,7 +20,7 @@ export class GameService {
   }
 
   getSession(sessionId: string): Observable<Session.SessionModel> {
-    return this.angularFireDatabase.object(this.PATH + '/' + sessionId).valueChanges() as Observable<Session.SessionModel>;
+    return this.angularFireDatabase.object(`${this.PATH}/${sessionId}`).valueChanges() as Observable<Session.SessionModel>;
   }
 
   async createSession(uid: string) {
@@ -35,7 +35,8 @@ export class GameService {
       squares: Array(9).fill(0),
       isNext: randomBoolean ? PlayerTypeEnum.O : PlayerTypeEnum.X,
       winnerSquares: [],
-      winner: ''
+      winner: '',
+      newSessionId: ''
     };
 
     return await this.sessionRef.push(session);

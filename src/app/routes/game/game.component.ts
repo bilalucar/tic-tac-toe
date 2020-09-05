@@ -34,37 +34,35 @@ export class GameComponent implements OnInit {
   isYourTurn = () => (this.isFirstPlayer && this.session?.isNext === this.session?.firstPlayerType)
     || (!this.isFirstPlayer && this.session?.isNext === this.session?.secondPlayerType)
 
-  isWinner = () => this.session?.winner === this.userId;
+  checkPermission = (session): boolean => !session || (session.firstPlayer !== this.userId && session.secondPlayer && session.secondPlayer !== this.userId);
+
+  setSecondPlayer = () => {
+    this.session = {
+      ...this.session,
+      secondPlayer: this.userId,
+      status: this.statusEnum.READY
+    };
+    this.updateSession();
+  };
 
   ngOnInit(): void {
     this.gameService.getSession(this.sessionId).subscribe((response: any) => {
-      if (!response) {
+      if (this.checkPermission(response)) {
         this.router.navigateByUrl('/');
         return;
       }
 
       this.session = response;
 
-      if (this.session.firstPlayer !== this.userId && this.session.secondPlayer && this.session.secondPlayer !== this.userId) {
-        this.router.navigateByUrl('/');
-        return;
-      }
-
       this.isFirstPlayer = this.userId === this.session.firstPlayer;
 
       this.playerType = this.isFirstPlayer ? this.session.firstPlayerType : this.session.secondPlayerType;
 
       if (!this.session.secondPlayer && !this.isFirstPlayer) {
-        this.session = {
-          ...this.session,
-          secondPlayer: this.userId,
-          status: this.statusEnum.READY
-        };
-        this.updateSession();
-        return;
+        this.setSecondPlayer();
       }
     }, error => {
-      console.log('error : ', error);
+      console.log('error while fetching session', error);
     });
   }
 
@@ -80,8 +78,18 @@ export class GameComponent implements OnInit {
     if (winner) {
       this.session = {
         ...this.session,
-        winner: this.userId,
+        winner: winner ? this.playerType : null,
         winnerSquares: winner,
+        status: this.statusEnum.FINISHED
+      };
+    }
+
+    const squareCount = this.session.squares.filter(item => item);
+
+    if (squareCount.length === 9 && !winner) {
+      this.session = {
+        ...this.session,
+        winner: 'DRAW',
         status: this.statusEnum.FINISHED
       };
     }
@@ -89,7 +97,23 @@ export class GameComponent implements OnInit {
     this.updateSession();
   }
 
-  updateSession(): void {
-    this.gameService.updateSession(this.sessionId, this.session);
+  replay(): void {
+    if (this.session.newSessionId) {
+      window.location.href = `/${this.session.newSessionId}`;
+      return;
+    }
+
+    this.gameService.createSession(this.userId).then(response => {
+      if (response?.path?.pieces_[1]){
+        this.session.newSessionId = response.path.pieces_[1];
+
+        this.updateSession()
+          .then(() => window.location.href = `/${this.session.newSessionId}`);
+      }
+    });
+  }
+
+  updateSession() {
+    return this.gameService.updateSession(this.sessionId, this.session);
   }
 }

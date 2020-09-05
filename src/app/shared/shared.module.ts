@@ -5,9 +5,11 @@ import { RouterModule } from '@angular/router';
 // COMPONENTS
 import { SquareComponent } from './components/square/square.component';
 import { BoardComponent } from './components/board/board.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
-  declarations: [SquareComponent, BoardComponent],
+  declarations: [SquareComponent, BoardComponent, FooterComponent, SpinnerComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -17,6 +19,8 @@ import { BoardComponent } from './components/board/board.component';
     RouterModule,
     SquareComponent,
     BoardComponent,
+    FooterComponent,
+    SpinnerComponent,
   ]
 })
 export class SharedModule { }

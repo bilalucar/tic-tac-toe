@@ -8,22 +8,25 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
 import { FormsModule } from '@angular/forms';
+import { AboutComponent } from './about/about.component';
 
 const COMPONENTS = [
   // page components
-  HomeComponent
+  HomeComponent,
+  GameComponent,
+  AboutComponent
 ];
 
 @NgModule({
   declarations: [
     ...COMPONENTS,
-    GameComponent
   ],
-    imports: [
-        CommonModule,
-        RoutesRoutingModule,
-        SharedModule,
-        FormsModule
-    ]
+  imports: [
+    CommonModule,
+    RoutesRoutingModule,
+    SharedModule,
+    FormsModule
+  ]
 })
-export class RoutesModule { }
+export class RoutesModule {
+}

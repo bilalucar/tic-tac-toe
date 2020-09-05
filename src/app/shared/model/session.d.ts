@@ -12,5 +12,6 @@ declare namespace Session {
     status: Status;
     winner: string;
     winnerSquares: number[];
+    newSessionId: string;
   }
 }

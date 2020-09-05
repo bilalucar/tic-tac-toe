@@ -1,0 +1,17 @@
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  font-weight: bold;
+
+  p {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  a {
+    color: var(--color-o);
+  }
+}

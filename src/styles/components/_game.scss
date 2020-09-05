@@ -1,0 +1,25 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+
+  &__title {
+    margin-bottom: 50px;
+    animation: var(--default-text-animation);
+    font-weight: normal;
+
+    @include mq($until: tablet) {
+      font-size: 1.5em;
+    }
+
+    &--wonn {
+      color: #1dd761;
+    }
+
+    &--lost {
+      color: var(--color-alert);
+    }
+  }
+}

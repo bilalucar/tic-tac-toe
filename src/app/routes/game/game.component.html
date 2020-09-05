@@ -1,23 +1,26 @@
 <div class="game">
-  <div *ngIf="!session?.squares">
-    LOADING
-  </div>
+  <app-spinner [loading]="!session?.squares"></app-spinner>
   <ng-container *ngIf="session?.squares">
     <h1 class="game__title">
-      <span *ngIf="session.status !== statusEnum.FINISHED">
+      <span *ngIf="session.status === statusEnum.STARTING">
+        Waiting for your friend
+      </span>
+      <span *ngIf="session.status === statusEnum.READY">
         {{ isYourTurn() ? 'It\'s your move.' : 'It\'s opponent\'s turn.' }}
       </span>
-      <span class="game__title--wonn" *ngIf="isWinner() && session.status === statusEnum.FINISHED">
-        Congratulations, you win!
-      </span>
-      <span class="game__title--lost" *ngIf="!isWinner() && session.status === statusEnum.FINISHED">
-        Sorry, you lost!
-      </span>
+      <ng-container *ngIf="session.status === statusEnum.FINISHED" [ngSwitch]="session.winner">
+        <span class="game__title--lost" *ngSwitchCase="'DRAW'">Draw!</span>
+        <span class="game__title--wonn" *ngSwitchCase="playerType">Congratulations, you win!</span>
+        <span class="game__title--lost" *ngSwitchDefault>Sorry, you lost!</span>
+      </ng-container>
     </h1>
     <app-board class="board"
                [squares]="session.squares"
                [winnerSquares]="session.winnerSquares"
                (squareClick)="updateSquares($event)">
     </app-board>
+    <button class="button" (click)="replay()" *ngIf="session.status === statusEnum.FINISHED">
+      Replay
+    </button>
   </ng-container>
 </div>

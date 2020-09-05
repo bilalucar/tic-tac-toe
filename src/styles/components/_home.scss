@@ -1,0 +1,35 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100%;
+
+  &__logo {
+    max-width: 300px;
+  }
+
+  &__description {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    max-width: 450px;
+  }
+
+  &__waiting-message {
+    animation: var(--default-text-animation);
+    font-weight: normal;
+
+    @include mq($until: tablet) {
+      font-size: 1.5em;
+    }
+  }
+
+  &__share {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 3fr 1fr;
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
+}
