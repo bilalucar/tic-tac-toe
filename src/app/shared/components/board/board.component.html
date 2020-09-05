@@ -1,8 +1,8 @@
 <app-square *ngFor="let item of squares; index as i"
             class="square"
             [class.square--x]="item === playerTypeEnum.X"
-            [class.square--highlight-x]="item === playerTypeEnum.X && winnerSquares?.length && winnerSquares.indexOf(i) > -1"
-            [class.square--highlight]="item === playerTypeEnum.O && winnerSquares?.length && winnerSquares.indexOf(i) > -1"
+            [class.square--highlight-x]="winnerSquares?.length && winnerSquares.indexOf(i) > -1 && item === playerTypeEnum.X"
+            [class.square--highlight]="winnerSquares?.length && winnerSquares.indexOf(i) > -1 && item === playerTypeEnum.O"
             [id]="i"
             [value]="item"
             (click)="squareClickEmit(i)">

@@ -8,6 +8,7 @@
   color: var(--color-o);
   transition: color, background-color 5s;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 
   &--highlight {
     background-color: var(--color-o);
