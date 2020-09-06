@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAnalyticsModule, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 
 import { environment } from '../environments/environment';
 
@@ -26,9 +27,13 @@ import { environment } from '../environments/environment';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAnalyticsModule
   ],
-  providers: [],
+  providers: [
+    UserTrackingService,
+    ScreenTrackingService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
